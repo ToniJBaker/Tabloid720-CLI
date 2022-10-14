@@ -10,6 +10,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine($"Welcome to Tabloid 720, Select a option to get started.");
             Console.WriteLine("Main Menu");
 
             Console.WriteLine(" 1) Journal Management");
