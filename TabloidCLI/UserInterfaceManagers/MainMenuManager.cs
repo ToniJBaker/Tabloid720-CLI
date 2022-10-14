@@ -5,7 +5,12 @@ namespace TabloidCLI.UserInterfaceManagers
     public class MainMenuManager : IUserInterfaceManager
     {
         private const string CONNECTION_STRING = 
+<<<<<<< HEAD
+            @"Data Source=localhost\SQLEXPRESS;Database=TabloidCLI;Integrated Security=True;TrustServerCertificate=True
+";
+=======
             @"Data Source=localhost\SQLEXPRESS;Database=TabloidCLI;Integrated Security=True;TrustServerCertificate=True";
+>>>>>>> main
 
         public IUserInterfaceManager Execute()
         {
