@@ -90,11 +90,14 @@ namespace TabloidCLI
                         results.Add(author);
                     }
 
+
                     reader.Close();
 
                     return results;
                 }
             }
         }
+
+
     }
 }
