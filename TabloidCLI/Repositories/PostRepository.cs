@@ -215,8 +215,8 @@ namespace TabloidCLI.Repositories
                     cmd.Parameters.AddWithValue("@content", post.Url);
                     cmd.Parameters.AddWithValue("@publishdatetime", post.PublishDateTime);
                     //doublecheck-- these are the "objects" do I not add them here?
-                    //cmd.Parameters.AddWithValue("@authorid", post.AuthorId);
-                    //cmd.Parameters.AddWithValue("@blogid", post.BlogId);
+                    cmd.Parameters.AddWithValue("@authorid", post.AuthorId);
+                    cmd.Parameters.AddWithValue("@blogid", post.BlogId);
 
                     cmd.ExecuteNonQuery();
                 }

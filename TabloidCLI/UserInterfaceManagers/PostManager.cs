@@ -130,8 +130,10 @@ namespace TabloidCLI.UserInterfaceManagers
             //ask group what kind of date we're using here
             post.PublishDateTime = DateTime.Now;
 
+            //switch statement for Author and blog information then post.AuthorId and post.BlogId will be those...
 
             _postRepository.Insert(post);
+
         }
 
         //This allows user to edit a journal entry but not change the Date Created
