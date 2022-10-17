@@ -77,7 +77,7 @@ namespace TabloidCLI.Repositories
             }
         }
 
-        //Insert-Add a new journal entry
+        //Insert-Add a new post
         public void Insert(Post post)
         {
             using (SqlConnection conn = Connection)
@@ -85,21 +85,15 @@ namespace TabloidCLI.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT p.id,
-                                               p.Title As PostTitle,
-                                               p.URL AS PostUrl,
-                                               p.PublishDateTime,
-                                               p.AuthorId,
-                                               p.BlogId,
-                                               a.FirstName,
-                                               a.LastName,
-                                               a.Bio,
-                                               b.Title AS BlogTitle,
-                                               b.URL AS BlogUrl
-                                          FROM Post p 
-                                               LEFT JOIN Author a on p.AuthorId = a.Id
-                                               LEFT JOIN Blog b on p.BlogId = b.Id 
-                                         WHERE p.AuthorId = @authorId";
+                    cmd.CommandText = @"INSERT INTO Post (Title, Url, PublishDateTime, AuthorId, BlogId )
+                                                     VALUES (@title, @url, @publishdatetime, @authorid, @blogid)";
+                    cmd.Parameters.AddWithValue("@title", post.Title);
+                    cmd.Parameters.AddWithValue("@content", post.Url);
+                    cmd.Parameters.AddWithValue("@publishdatetime", post.PublishDateTime);
+                    //doublecheck-- these are the "objects" do I not add them here?
+                    cmd.Parameters.AddWithValue("@authorid", post.AuthorId);
+                    cmd.Parameters.AddWithValue("@blogid", post.BlogId);
+
 
                     cmd.ExecuteNonQuery();
                 }
