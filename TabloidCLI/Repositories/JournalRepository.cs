@@ -23,8 +23,8 @@ namespace TabloidCLI
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT Id,
-                                               Title
-                                               Content
+                                               Title,
+                                               Content,
                                                 CreateDateTime
                                           FROM Journal";
 
