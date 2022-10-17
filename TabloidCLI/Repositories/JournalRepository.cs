@@ -39,7 +39,7 @@ namespace TabloidCLI
                             Title = reader.GetString(reader.GetOrdinal("Title")),
                             Content = reader.GetString(reader.GetOrdinal("Content")),
                             CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime"))
-                          
+
                         };
                         journals.Add(journal);
                     }
@@ -80,7 +80,7 @@ namespace TabloidCLI
                                 Id = reader.GetInt32(reader.GetOrdinal("JournalId")),
                                 Title = reader.GetString(reader.GetOrdinal("Title")),
                                 Content = reader.GetString(reader.GetOrdinal("Content")),
-                                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
+                                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime"))
                             };
                         }
 
