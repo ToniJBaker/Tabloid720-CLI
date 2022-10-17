@@ -27,9 +27,9 @@ namespace TabloidCLI.UserInterfaceManagers
             string choice = Console.ReadLine();
             switch (choice)
             {
-                case "1":
-                    SearchBlogs();
-                    return this;
+                //case "1":
+                //    SearchBlogs();
+                //    return this;
                 case "2":
                     SearchAuthors();
                     return this;
