@@ -25,7 +25,7 @@ namespace TabloidCLI
                     cmd.CommandText = @"SELECT Id,
                                                Title,
                                                Content,
-                                               CreateDateTime
+                                                CreateDateTime
                                           FROM Journal";
 
                     List<Journal> journals = new List<Journal>();
