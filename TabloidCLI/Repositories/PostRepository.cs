@@ -11,12 +11,79 @@ namespace TabloidCLI.Repositories
 
         public List<Post> GetAll()
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id,
+                                               Title,
+                                               Url,
+                                               PublishDateTime
+                                          FROM Post";
+
+                    List<Post> posts = new List<Post>();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Post post = new Post()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Title = reader.GetString(reader.GetOrdinal("Title")),
+                            Url = reader.GetString(reader.GetOrdinal("Url")),
+                            PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDateTime"))
+
+                        };
+                        posts.Add(post);
+                    }
+
+                    reader.Close();
+
+                    return posts;
+                }
+            }
         }
 
         public Post Get(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT p.Id AS PostId,
+                                               p.Title,
+                                               p.Url,
+                                               p.PublishDateTime
+                                          FROM Post p 
+                                          WHERE p.Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    Post post = null;
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        if (post == null)
+                        {
+                            post = new Post()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("PostId")),
+                                Title = reader.GetString(reader.GetOrdinal("Title")),
+                                Url = reader.GetString(reader.GetOrdinal("Url")),
+                                PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDateTime"))
+                            };
+                        }
+
+                    }
+
+                    reader.Close();
+
+                    return post;
+                }
+            }
         }
 
         public List<Post> GetByAuthor(int authorId)
@@ -148,9 +215,8 @@ namespace TabloidCLI.Repositories
                     cmd.Parameters.AddWithValue("@content", post.Url);
                     cmd.Parameters.AddWithValue("@publishdatetime", post.PublishDateTime);
                     //doublecheck-- these are the "objects" do I not add them here?
-                    cmd.Parameters.AddWithValue("@authorid", post.AuthorId);
-                    cmd.Parameters.AddWithValue("@blogid", post.BlogId);
-
+                    //cmd.Parameters.AddWithValue("@authorid", post.AuthorId);
+                    //cmd.Parameters.AddWithValue("@blogid", post.BlogId);
 
                     cmd.ExecuteNonQuery();
                 }
