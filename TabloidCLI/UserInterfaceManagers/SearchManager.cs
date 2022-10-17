@@ -27,9 +27,9 @@ namespace TabloidCLI.UserInterfaceManagers
             string choice = Console.ReadLine();
             switch (choice)
             {
-                //case "1":
-                //    SearchBlogs();
-                //    return this;
+                case "1":
+                    SearchBlogs();
+                    return this;
                 case "2":
                     SearchAuthors();
                     return this;
@@ -46,22 +46,22 @@ namespace TabloidCLI.UserInterfaceManagers
         }
 
 
-        //private void SearchBlogs()
-        //{
-        //    Console.Write("Tag> ");
-        //    string tagName = Console.ReadLine();
+        private void SearchBlogs()
+        {
+            Console.Write("Tag> ");
+            string tagName = Console.ReadLine();
 
-        //    SearchResults<Blog> results = _tagRepository.SearchBlogs(tagName);
+            SearchResults<Blog> results = _tagRepository.SearchBlogs(tagName);
 
-        //    if (results.NoResultsFound)
-        //    {
-        //        Console.WriteLine($"No results for {tagName}");
-        //    }
-        //    else
-        //    {
-        //        results.Display();
-        //    }
-        //}
+            if (results.NoResultsFound)
+            {
+                Console.WriteLine($"No results for {tagName}");
+            }
+            else
+            {
+                results.Display();
+            }
+        }
 
 
         private void SearchAuthors()
