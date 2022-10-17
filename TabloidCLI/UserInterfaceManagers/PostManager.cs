@@ -130,7 +130,25 @@ namespace TabloidCLI.UserInterfaceManagers
             //ask group what kind of date we're using here
             post.PublishDateTime = DateTime.Now;
 
-            //switch statement for Author and blog information then post.AuthorId and post.BlogId will be those...
+
+            // list authors
+            //foreach author in authors
+            //console write line a.id a.fullname
+            //console write line "> "
+            //int choice = int.Parse(readline)
+            //author author = authors[choice - 1]
+            Console.WriteLine("Please choose an author");
+            List<Author> authors = _authorRepository.GetAll();
+            foreach (Author author in authors)
+            {
+                Console.Write($"{author.Id} {author.FullName}");
+            }
+
+            Console.WriteLine("> ");
+            int choice = int.Parse(Console.ReadLine());
+            Author author = authors[choice - 1];
+
+            post.Author = author;
 
             _postRepository.Insert(post);
 
