@@ -12,12 +12,14 @@ namespace TabloidCLI.UserInterfaceManagers
     {
         private readonly IUserInterfaceManager _parentUI;
         private PostRepository _postRepository;
+        private AuthorRepository _authorRepository;
         private string _connectionString;
 
         public PostManager(IUserInterfaceManager parentUI, string connectionString)
         {
             _parentUI = parentUI;
             _postRepository = new PostRepository(connectionString);
+            _authorRepository = new AuthorRepository(connectionString);
             _connectionString = connectionString;
         }
 
@@ -139,9 +141,9 @@ namespace TabloidCLI.UserInterfaceManagers
             //author author = authors[choice - 1]
             Console.WriteLine("Please choose an author");
             List<Author> authors = _authorRepository.GetAll();
-            foreach (Author author in authors)
+            foreach (Author singleAuthor in authors)
             {
-                Console.Write($"{author.Id} {author.FullName}");
+                Console.Write($"{singleAuthor.Id} {singleAuthor.FullName}");
             }
 
             Console.WriteLine("> ");
