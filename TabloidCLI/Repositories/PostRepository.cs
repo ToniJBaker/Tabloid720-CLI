@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TabloidCLI.Models;
 using TabloidCLI.Repositories;
 
@@ -208,7 +209,7 @@ namespace TabloidCLI.Repositories
                     Post post = null;
 
                     SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         if (post == null)
                         {
@@ -219,6 +220,25 @@ namespace TabloidCLI.Repositories
                                 Url = reader.GetString(reader.GetOrdinal("Url")),
                                 PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDateTime"))
                             };
+                            if (!reader.IsDBNull(reader.GetOrdinal("Name"))) //if this ordinal of Name is not null
+                            {
+                                Tag tag = new Tag()
+                                {
+                                   Name = reader.GetString(reader.GetOrdinal("Name"))
+                                };
+                                post.Tags.Add(tag);
+                            }
+                        }
+                        else 
+                        {
+                            if (!reader.IsDBNull(reader.GetOrdinal("Name"))) //if this ordinal of Name is not null
+                            {
+                                Tag tag = new Tag()
+                                {
+                                    Name = reader.GetString(reader.GetOrdinal("Name"))
+                                };
+                                post.Tags.Add(tag);
+                            }
                         }
 
                     }
@@ -263,5 +283,26 @@ namespace TabloidCLI.Repositories
         {
             throw new NotImplementedException();
         }
+        
+        //insert a tag on a post
+        public void InsertTag(Post post, Tag tag)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO PostTag (PostId, TagId)
+                                                       VALUES (@postId, @tagId)";
+                    cmd.Parameters.AddWithValue("@postId", post.Id);
+                    cmd.Parameters.AddWithValue("@tagId", tag.Id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+
+
+
     }
 }
