@@ -28,10 +28,10 @@ namespace TabloidCLI.Repositories
                                                a.LastName,
                                                a.Bio,
                                                b.Title as BlogTitle,
-                                               b.Url as BlogUrl
+                                               b.Url as BlogUrl,
                                           FROM Post p
-                                          LEFT JOIN Author a on p.AuthorId = a.Id
-                                          LEFT JOIN Blog b on p.BlogId = b.Id";
+                                          JOIN Author a on p.AuthorId = a.Id
+                                          JOIN Blog b on p.BlogId = b.Id";
 
                     List<Post> posts = new List<Post>();
 
@@ -47,14 +47,14 @@ namespace TabloidCLI.Repositories
                             PublishDateTime = reader.GetDateTime(reader.GetOrdinal("PublishDateTime")),
                             Author = new Author()
                             {
-                                Id = reader.GetInt32(reader.GetOrdinal("AuthorId")),
+                                Id = reader.GetInt32(reader.GetOrdinal("AuthorId"))
                                 //FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
                                 //LastName = reader.GetString(reader.GetOrdinal("LastName")),
                                 //Bio = reader.GetString(reader.GetOrdinal("Bio"))
                             },
                             Blog = new Blog()
                             {
-                                Id = reader.GetInt32(reader.GetOrdinal("BlogId")),
+                                Id = reader.GetInt32(reader.GetOrdinal("BlogId"))
                                 //Title = reader.GetString(reader.GetOrdinal("BlogTitle")),
                                 //Url = reader.GetString(reader.GetOrdinal("BlogUrl"))
                             }
