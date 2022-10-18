@@ -9,13 +9,14 @@ namespace TabloidCLI.UserInterfaceManagers
     {
         private IUserInterfaceManager _parentUI;
         private PostRepository _postRepository;
-        //private NoteRepository _noteRepository;
+        private NoteRepository _noteRepository;
         private int _postId;
 
         public NoteDetailManager(IUserInterfaceManager parentUI, string connectionString, int postId)
         {
             _parentUI = parentUI;
             _postRepository = new PostRepository(connectionString);
+            _noteRepository = new NoteRepository(connectionString); 
             _postId = postId;
         }
 
@@ -31,10 +32,10 @@ namespace TabloidCLI.UserInterfaceManagers
             switch (choice)
             {
                 case "1":
-                    //ListNotes();
+                    ListNotes();
                     return this;
                 case "2":
-                    //AddNote();
+                    AddNote();
                     return this;
                 case "3":
                     //RemoveNote();
@@ -45,7 +46,44 @@ namespace TabloidCLI.UserInterfaceManagers
                     Console.WriteLine("Invalid Selection");
                     return this;
             }
-        }       
+        }
+
+        private void ListNotes()
+        {
+            List<Note> notes = _noteRepository.GetAll();
+            foreach (Note note in notes)
+            {
+                Console.WriteLine("");
+                Console.WriteLine(note.Title);
+                Console.WriteLine("");
+                Console.WriteLine(note.Content);
+                Console.WriteLine("");
+                Console.WriteLine(note.CreateDateTime);
+                Console.WriteLine("");
+
+
+            }
+        }
+
+        private void AddNote()
+        {
+            Console.WriteLine("New Note");
+            Note note = new Note();
+
+            Console.WriteLine("Title:");
+            note.Title = Console.ReadLine();
+
+            Console.WriteLine("Enter Note Here:");
+            note.Content = Console.ReadLine();
+
+            note.CreateDateTime = DateTime.Now;
+
+            note.PostId = _postId;
+
+            _noteRepository.Insert(note);
+        }
+
+
         }
   }
 
