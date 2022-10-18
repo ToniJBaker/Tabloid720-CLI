@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TabloidCLI.Models;
 
 namespace TabloidCLI.UserInterfaceManagers
@@ -33,7 +30,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.Write("> ");
             string choice = Console.ReadLine();
 
-            switch(choice)
+            switch (choice)
             {
                 case "1":
                     List();
@@ -68,7 +65,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private void List()
         {
             List<Blog> blogs = _blogRepository.GetAll();
-            foreach(Blog blog in blogs)
+            foreach (Blog blog in blogs)
             {
                 Console.WriteLine("");
                 Console.WriteLine(blog);
@@ -90,14 +87,14 @@ namespace TabloidCLI.UserInterfaceManagers
             for (int i = 0; i < blogs.Count; i++)
             {
                 Blog blog = blogs[i];
-                Console.WriteLine($"{i +1}) {blog.Title}");
+                Console.WriteLine($"{i + 1}) {blog.Title}");
             }
             Console.WriteLine(">");
 
             string input = Console.ReadLine();
             try
             {
-                int choice = int.Parse (input);
+                int choice = int.Parse(input);
                 return blogs[choice - 1];
             }
             catch (Exception ex)
