@@ -75,8 +75,22 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Edit()
         {
-            throw new NotImplementedException();
+            Tag tagToEdit = Choose("Which tag would you like to edit?");
+            if (tagToEdit == null)
+            {
+                return;
+            }
 
+            Console.WriteLine();
+            Console.Write("New name (blank to leave unchanged: ");
+            string Name = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(Name))
+            {
+                tagToEdit.Name = Name;
+            }
+            //throw new NotImplementedException();
+
+            _tagRepository.Update(tagToEdit);
 
         }
 
