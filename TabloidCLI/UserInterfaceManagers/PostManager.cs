@@ -34,7 +34,6 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine(" 3) Edit Post");
             Console.WriteLine(" 4) Remove Post");
             Console.WriteLine(" 5) View Post Details");
-            Console.WriteLine(" 6) Note Management");
             Console.WriteLine(" 0) Go Back");
 
             Console.Write("> ");
@@ -63,8 +62,6 @@ namespace TabloidCLI.UserInterfaceManagers
                     {
                         return new PostDetailManager(this, _connectionString, post.Id);
                     }
-                //case "6":
-                //check with team
 
                 case "0":
                     return _parentUI;
