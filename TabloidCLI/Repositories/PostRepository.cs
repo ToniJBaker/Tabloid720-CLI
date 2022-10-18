@@ -339,7 +339,7 @@ namespace TabloidCLI.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"DELETE FROM PostTag 
-                                         WHERE PostId = @postid AND 
+                                         WHERE PostId = @postId AND 
                                                TagId = @tagId";
                     cmd.Parameters.AddWithValue("@postId", postId);
                     cmd.Parameters.AddWithValue("@tagId", tagId);
