@@ -37,7 +37,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     SearchPosts();
                     return this;
                 case "4":
-                    SearchAll();
+                    //SearchAll();
                     return this;
                 case "0":
                     return _parentUI;
