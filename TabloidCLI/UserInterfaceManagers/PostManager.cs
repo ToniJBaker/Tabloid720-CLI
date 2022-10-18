@@ -13,6 +13,7 @@ namespace TabloidCLI.UserInterfaceManagers
         private readonly IUserInterfaceManager _parentUI;
         private PostRepository _postRepository;
         private AuthorRepository _authorRepository;
+        private BlogRepository _blogRepository;
         private string _connectionString;
 
         public PostManager(IUserInterfaceManager parentUI, string connectionString)
@@ -20,6 +21,7 @@ namespace TabloidCLI.UserInterfaceManagers
             _parentUI = parentUI;
             _postRepository = new PostRepository(connectionString);
             _authorRepository = new AuthorRepository(connectionString);
+            _blogRepository = new BlogRepository(connectionString);
             _connectionString = connectionString;
         }
 
@@ -130,6 +132,8 @@ namespace TabloidCLI.UserInterfaceManagers
 
             //Console.Write("CreateDateTime: ");
             //ask group what kind of date we're using here
+            //like Convert.ToDateTime(Console.ReadLine()) ?
+            //this works and posts to database, but obv the date is datetime.now
             post.PublishDateTime = DateTime.Now;
 
 
@@ -139,11 +143,12 @@ namespace TabloidCLI.UserInterfaceManagers
             //console write line "> "
             //int choice = int.Parse(readline)
             //author author = authors[choice - 1]
-            Console.WriteLine("Please choose an author");
+            Console.WriteLine("Please choose an author:");
             List<Author> authors = _authorRepository.GetAll();
             foreach (Author singleAuthor in authors)
             {
-                Console.Write($"{singleAuthor.Id} {singleAuthor.FullName}");
+                Console.WriteLine($"{singleAuthor.Id} {singleAuthor.FullName}");
+                Console.WriteLine();
             }
 
             Console.WriteLine("> ");
@@ -151,6 +156,19 @@ namespace TabloidCLI.UserInterfaceManagers
             Author author = authors[choice - 1];
 
             post.Author = author;
+
+            Console.WriteLine("Please choose a blog:");
+            List<Blog> blogs = _blogRepository.GetAll();
+
+            foreach (Blog singleBlog in blogs)
+            {
+                Console.WriteLine($"{singleBlog.Id} {singleBlog.Title}");
+            }
+            Console.WriteLine("> ");
+            int blogChoice = int.Parse(Console.ReadLine());
+            Blog blog = blogs[choice - 1];
+
+            post.Blog = blog;
 
             _postRepository.Insert(post);
 
