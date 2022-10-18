@@ -53,20 +53,18 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "4":
                     Remove();
                     return this;
-                //case "5":
-                    //check with Author Detail for similar situation
-                    //looks like this:
-                    //Author author = Choose();
-                    //if (author == null)
-                    //{
-                    //    return this;
-                    //}
-                    //else
-                    //{
-                    //    return new AuthorDetailManager(this, _connectionString, author.Id);
-                    //}
+                case "5":
+                    Post post = Choose();
+                    if (post == null)
+                    {
+                        return this;
+                    }
+                    else
+                    {
+                        return new PostDetailManager(this, _connectionString, post.Id);
+                    }
                 //case "6":
-                    //check with team
+                //check with team
 
                 case "0":
                     return _parentUI;
@@ -87,7 +85,6 @@ namespace TabloidCLI.UserInterfaceManagers
             }
         }
 
-        //Not fully understanding the Choose method-- pulled from Author Manager
         private Post Choose(string prompt = null)
         {
             if (prompt == null)
