@@ -34,7 +34,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     //ListNotes();
                     return this;
                 case "2":
-                    //AddNote();
+                    AddNote();
                     return this;
                 case "3":
                     //RemoveNote();
@@ -45,7 +45,25 @@ namespace TabloidCLI.UserInterfaceManagers
                     Console.WriteLine("Invalid Selection");
                     return this;
             }
-        }       
+        }    
+        
+        private void AddNote()
+        {
+            Console.WriteLine("New Note");
+            Note note = new Note();
+
+            Console.WriteLine("Title:");
+            note.Title = Console.ReadLine();
+
+            Console.WriteLine("Enter Note Here:");
+            note.Content = Console.ReadLine();
+
+            note.CreateDateTime = DateTime.Now;
+
+            note.PostId = _postId;
+        }
+
+
         }
   }
 
