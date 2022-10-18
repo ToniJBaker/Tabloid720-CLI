@@ -8,7 +8,7 @@ using TabloidCLI.Repositories;
 
 namespace TabloidCLI.UserInterfaceManagers
 {
-    internal class PostManager : IUserInterfaceManager
+    public class PostManager : IUserInterfaceManager
     {
         private readonly IUserInterfaceManager _parentUI;
         private PostRepository _postRepository;
@@ -77,12 +77,13 @@ namespace TabloidCLI.UserInterfaceManagers
         }
 
         //creates list of all journal entries
+        //not sure what I'm doing wrong
         private void List()
         {
             List<Post> posts = _postRepository.GetAll();
             foreach (Post post in posts)
             {
-                Console.WriteLine(post.Title);
+                Console.WriteLine($"{post.Title} {post.Url}");
             }
         }
 
