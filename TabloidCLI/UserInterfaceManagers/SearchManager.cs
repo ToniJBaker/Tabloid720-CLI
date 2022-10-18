@@ -34,8 +34,10 @@ namespace TabloidCLI.UserInterfaceManagers
                     SearchAuthors();
                     return this;
                 case "3":
+                    SearchPosts();
                     return this;
                 case "4":
+                    //SearchAll();
                     return this;
                 case "0":
                     return _parentUI;
@@ -46,7 +48,7 @@ namespace TabloidCLI.UserInterfaceManagers
         }
 
 
-        private void SearchBlogs()
+        private void SearchBlogs() //searching blogs by tab names
         {
             Console.Write("Tag> ");
             string tagName = Console.ReadLine();
@@ -63,8 +65,24 @@ namespace TabloidCLI.UserInterfaceManagers
             }
         }
 
+        private void SearchPosts() //searching blogs by tab names
+        {
+            Console.Write("Tag> ");
+            string tagName = Console.ReadLine();
 
-        private void SearchAuthors()
+            SearchResults<Post> results = _tagRepository.SearchPosts(tagName);
+
+            if (results.NoResultsFound)
+            {
+                Console.WriteLine($"No results for {tagName}");
+            }
+            else
+            {
+                results.Display();
+            }
+        }
+
+        private void SearchAuthors() //searching authors by tag names
         {
             Console.Write("Tag> ");
             string tagName = Console.ReadLine();
@@ -80,5 +98,23 @@ namespace TabloidCLI.UserInterfaceManagers
                 results.Display();
             }
         }
+
+        //private void SearchAll() //searching authors, blogs and posts by tag names
+        //{
+        //    Console.Write("Tag> ");
+        //    string tagName = Console.ReadLine();
+
+        //    SearchResults<Author> results = _tagRepository.SearchAuthors(tagName);
+
+        //    if (results.NoResultsFound)
+        //    {
+        //        Console.WriteLine($"No results for {tagName}");
+        //    }
+        //    else
+        //    {
+        //        results.Display();
+        //    }
+        //}
+    
     }
 }
