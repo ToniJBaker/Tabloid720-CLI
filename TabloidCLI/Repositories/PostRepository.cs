@@ -17,6 +17,7 @@ namespace TabloidCLI.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
+                    //this sql query works and lists a handful of posts with correct associated information
                     cmd.CommandText = @"SELECT p.Id,
                                                p.Title as PostTitle,
                                                p.URL as PostUrl,
@@ -32,9 +33,9 @@ namespace TabloidCLI.Repositories
                                           LEFT JOIN Author a on p.AuthorId = a.Id
                                           LEFT JOIN Blog b on p.BlogId = b.Id";
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-
                     List<Post> posts = new List<Post>();
+
+                    SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
@@ -47,15 +48,15 @@ namespace TabloidCLI.Repositories
                             Author = new Author()
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("AuthorId")),
-                                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                                LastName = reader.GetString(reader.GetOrdinal("LastName")),
-                                Bio = reader.GetString(reader.GetOrdinal("Bio"))
+                                //FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                                //LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                                //Bio = reader.GetString(reader.GetOrdinal("Bio"))
                             },
                             Blog = new Blog()
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("BlogId")),
-                                Title = reader.GetString(reader.GetOrdinal("BlogTitle")),
-                                Url = reader.GetString(reader.GetOrdinal("BlogUrl"))
+                                //Title = reader.GetString(reader.GetOrdinal("BlogTitle")),
+                                //Url = reader.GetString(reader.GetOrdinal("BlogUrl"))
                             }
                         };
                         posts.Add(post);

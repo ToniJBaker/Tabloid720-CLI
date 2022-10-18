@@ -53,7 +53,7 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "4":
                     Remove();
                     return this;
-                case "5":
+                //case "5":
                     //check with Author Detail for similar situation
                     //looks like this:
                     //Author author = Choose();
@@ -65,7 +65,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     //{
                     //    return new AuthorDetailManager(this, _connectionString, author.Id);
                     //}
-                case "6":
+                //case "6":
                     //check with team
 
                 case "0":
