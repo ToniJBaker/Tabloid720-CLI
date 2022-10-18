@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TabloidCLI.Models
 {
@@ -10,5 +11,6 @@ namespace TabloidCLI.Models
         public DateTime PublishDateTime { get; set; }
         public Author Author { get; set; }
         public Blog Blog { get; set; }
+        public List<Tag> Tags { get; set; } = new List<Tag>();
     }
 }
