@@ -38,7 +38,7 @@ namespace TabloidCLI.UserInterfaceManagers
                     AddNote();
                     return this;
                 case "3":
-                    //RemoveNote();
+                    RemoveNote();
                     return this;
                 case "0":
                     return _parentUI;
@@ -83,6 +83,45 @@ namespace TabloidCLI.UserInterfaceManagers
             _noteRepository.Insert(note);
         }
 
+        private Note Choose(string prompt = null)
+        {
+            if (prompt == null)
+            {
+                prompt = "Please choose a note:";
+            }
+
+            Console.WriteLine(prompt);
+
+            List<Note> notes = _noteRepository.GetAll();
+
+            for (int i = 0; i < notes.Count; i++)
+            {
+                Note note = notes[i];
+                Console.WriteLine($" {i + 1}) {note.Title}");
+            }
+            Console.Write("> ");
+
+            string input = Console.ReadLine();
+            try
+            {
+                int choice = int.Parse(input);
+                return notes[choice - 1];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Invalid Selection");
+                return null;
+            }
+        }
+
+        private void RemoveNote()
+        {
+            Note noteToDelete = Choose("Which author would you like to remove?");
+            if (noteToDelete != null)
+            {
+                _noteRepository.Delete(noteToDelete.Id);
+            }
+        }
 
         }
   }
