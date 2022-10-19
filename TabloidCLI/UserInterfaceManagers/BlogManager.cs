@@ -19,6 +19,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.BackgroundColor = ConsoleColor.Red;
             Console.WriteLine("Blog Menu");
             Console.WriteLine(" 1) List Blogs");
             Console.WriteLine(" 2) Blog Details");
