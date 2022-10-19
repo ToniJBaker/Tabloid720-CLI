@@ -45,6 +45,7 @@ namespace TabloidCLI
         }
 
         public void Insert(Tag tag)
+            //Method to add new tag
         {
             using (SqlConnection conn = Connection)
             {
@@ -58,10 +59,10 @@ namespace TabloidCLI
                     cmd.ExecuteNonQuery();
                 }
             }
-            //throw new NotImplementedException();
         }
 
         public void Update(Tag tag)
+            //Method to edit tag
         {
             using (SqlConnection conn = Connection)
             {
@@ -78,12 +79,22 @@ namespace TabloidCLI
                     cmd.ExecuteNonQuery();
                 }
             }
-            //throw new NotImplementedException();
         }
 
         public void Delete(int id)
+            //Method to delete tag
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM Tag WHERE id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         public SearchResults<Author> SearchAuthors(string tagName)

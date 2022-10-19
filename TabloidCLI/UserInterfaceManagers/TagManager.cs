@@ -58,7 +58,6 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 Console.WriteLine(tag);
             }
-            //throw new NotImplementedException();
         }
 
         private Tag Choose(string prompt = null)
@@ -101,7 +100,6 @@ namespace TabloidCLI.UserInterfaceManagers
             tag.Name = Console.ReadLine();
 
             _tagRepository.Insert(tag);
-            //throw new NotImplementedException();
         }
 
         private void Edit()
@@ -119,7 +117,6 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 tagToEdit.Name = Name;
             }
-            //throw new NotImplementedException();
 
             _tagRepository.Update(tagToEdit);
 
@@ -127,7 +124,11 @@ namespace TabloidCLI.UserInterfaceManagers
 
         private void Remove()
         {
-            throw new NotImplementedException();
+            Tag tagToDelete = Choose("Which tag would you like to remove?");
+            if (tagToDelete != null)
+            {
+                _tagRepository.Delete(tagToDelete.Id);
+            }
         }
     }
 }
