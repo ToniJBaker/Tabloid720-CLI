@@ -224,7 +224,8 @@ namespace TabloidCLI.Repositories
                             {
                                 Tag tag = new Tag()
                                 {
-                                   Name = reader.GetString(reader.GetOrdinal("Name"))
+                                    Id = reader.GetInt32(reader.GetOrdinal("TagId")),
+                                    Name = reader.GetString(reader.GetOrdinal("Name"))
                                 };
                                 post.Tags.Add(tag);
                             }
@@ -235,6 +236,7 @@ namespace TabloidCLI.Repositories
                             {
                                 Tag tag = new Tag()
                                 {
+                                    Id = reader.GetInt32(reader.GetOrdinal("TagId")),
                                     Name = reader.GetString(reader.GetOrdinal("Name"))
                                 };
                                 post.Tags.Add(tag);
@@ -326,6 +328,24 @@ namespace TabloidCLI.Repositories
                                                        VALUES (@postId, @tagId)";
                     cmd.Parameters.AddWithValue("@postId", post.Id);
                     cmd.Parameters.AddWithValue("@tagId", tag.Id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteTag(int postId, int tagId)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM PostTag 
+                                         WHERE PostId = @postId AND 
+                                               TagId = @tagId";
+                    cmd.Parameters.AddWithValue("@postId", postId);
+                    cmd.Parameters.AddWithValue("@tagId", tagId);
+
                     cmd.ExecuteNonQuery();
                 }
             }

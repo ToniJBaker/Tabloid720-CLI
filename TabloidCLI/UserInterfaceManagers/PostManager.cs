@@ -28,6 +28,7 @@ namespace TabloidCLI.UserInterfaceManagers
         //creates the menu for post functions
         public IUserInterfaceManager Execute()
         {
+            Console.BackgroundColor = ConsoleColor.Green;
             Console.WriteLine("Post Menu");
             Console.WriteLine(" 1) List Posts");
             Console.WriteLine(" 2) Add Post");

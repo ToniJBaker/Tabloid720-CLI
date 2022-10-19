@@ -20,6 +20,8 @@ namespace TabloidCLI.UserInterfaceManagers
         //creates the menu for Journal functions
         public IUserInterfaceManager Execute()
         {
+            Console.BackgroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine("Journal Menu");
             Console.WriteLine(" 1) List Journals");
             Console.WriteLine(" 2) Add Journal");
