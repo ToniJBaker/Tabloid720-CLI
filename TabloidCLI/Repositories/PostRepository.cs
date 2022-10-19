@@ -224,7 +224,8 @@ namespace TabloidCLI.Repositories
                             {
                                 Tag tag = new Tag()
                                 {
-                                   Name = reader.GetString(reader.GetOrdinal("Name"))
+                                    Id = reader.GetInt32(reader.GetOrdinal("TagId")),
+                                    Name = reader.GetString(reader.GetOrdinal("Name"))
                                 };
                                 post.Tags.Add(tag);
                             }
@@ -235,6 +236,7 @@ namespace TabloidCLI.Repositories
                             {
                                 Tag tag = new Tag()
                                 {
+                                    Id = reader.GetInt32(reader.GetOrdinal("TagId")),
                                     Name = reader.GetString(reader.GetOrdinal("Name"))
                                 };
                                 post.Tags.Add(tag);
